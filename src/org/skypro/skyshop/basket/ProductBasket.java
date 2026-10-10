@@ -1,6 +1,8 @@
 package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 
 public class ProductBasket {
     private final Product[] products = new Product[5];
@@ -32,11 +34,24 @@ public class ProductBasket {
             System.out.println("в корзине пусто");
             return;
         }
+        int specialProductsCount = 0;
         for (int i = 0; i < count; i++) {
             Product product = products[i];
-            System.out.println(product.getName() + ": " + product.getPrice());
+            double price = product.getPrice();
+            if (product.isSpecial()) {
+                specialProductsCount++;
+            }
+            if (product instanceof DiscountedProduct) {
+                DiscountedProduct dp = (DiscountedProduct) product;
+                System.out.println(dp.getName() + ": " + price + " (" + dp.getDiscount() + "%)");
+            } else if (product instanceof FixPriceProduct) {
+                System.out.println(product.getName() + ": Фиксированная цена: " + price);
+            } else {
+                System.out.println(product.getName() + ": " + price);
+            }
         }
         System.out.println("Итого: " + getTotalPrice());
+        System.out.println("Специальных товаров: " + specialProductsCount);
     }
 
     // Метод, проверяющий продукт в корзине по имени
