@@ -1,7 +1,7 @@
 package org.skypro.skyshop.product;
 
 public class FixPriceProduct extends Product {
-    private static final double fixedPrice = 99.0;
+    private static final double FIXED_PRICE = 99.0;
 
     public FixPriceProduct(String name) {
         super(name);
@@ -9,7 +9,7 @@ public class FixPriceProduct extends Product {
 
     @Override
     public double getPrice() {
-        return fixedPrice;
+        return FIXED_PRICE;
     }
 
     @Override
