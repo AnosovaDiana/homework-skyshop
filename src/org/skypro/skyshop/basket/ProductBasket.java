@@ -53,7 +53,6 @@ public class ProductBasket {
     }
 
 
-
     // Метод, проверяющий продукт в корзине по имени
     public boolean hasProduct(String name) {
         for (int i = 0; i < count; i++) {
