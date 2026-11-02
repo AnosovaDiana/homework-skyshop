@@ -56,7 +56,7 @@ public class SearchEngine {
         return count;
     }
 
-    public Searchable findMostSuitable(String search) throws BestResultNotFound {
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
         if (search == null || search.isBlank()) {
             throw new IllegalArgumentException("Поисковая строка не может быть null, пустой или состоять только из пробелов!");
         }

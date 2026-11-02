@@ -145,7 +145,7 @@ public class Main {
         try {
             System.out.println("Ищем самый подходящий элемент по запросу 'Кофе'");
 
-            Searchable result = engine.findMostSuitable("Кофе");
+            Searchable result = engine.findBestMatch("Кофе");
 
             System.out.println("Объект успешно найден!");
             System.out.println("Содержимое найденного объекта: " + result.getSearchTerm());
@@ -156,7 +156,7 @@ public class Main {
 
         try {
             System.out.println("Ищем самый подходящий элемент по запросу 'Сок'");
-            Searchable result = engine.findMostSuitable("Сок");
+            Searchable result = engine.findBestMatch("Сок");
             System.out.println("Объект найден: " + result.getSearchTerm());
 
         } catch (BestResultNotFound e) {
