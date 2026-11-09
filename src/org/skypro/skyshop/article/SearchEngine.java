@@ -3,38 +3,27 @@ package org.skypro.skyshop.article;
 import org.skypro.skyshop.article.Searchable;
 import org.skypro.skyshop.product.BestResultNotFound;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SearchEngine {
-    private final Searchable[] searchables;
-    private int size = 0;
+    private final List<Searchable> searchables = new ArrayList<>();
 
-    public SearchEngine(int capacity) {
-        this.searchables = new Searchable[capacity];
+    public SearchEngine() {
+
     }
 
     public void add(Searchable searchable) {
-        if (size < searchables.length) {
-            searchables[size] = searchable;
-            size++;
-        } else {
-            System.out.println("Поисковый движок переполнен! Не удалось добавить элемент.");
-        }
+        searchables.add(searchable);
     }
 
-    public Searchable[] search(String request) {
-        Searchable[] results = new Searchable[5];
-        int count = 0;
-        for (int i = 0; i < size; i++) {
-            Searchable current = searchables[i];
+    public List<Searchable> search(String request) {
+        List<Searchable> results = new ArrayList<>();
 
-
+        for (Searchable current : searchables) {
             if (current.getSearchTerm().contains(request)) {
-                results[count] = current;
-                count++;
-
-                if (count == 5) {
-                    break;
-                }
+                results.add(current);
             }
         }
         return results;
@@ -60,15 +49,13 @@ public class SearchEngine {
         if (search == null || search.isBlank()) {
             throw new IllegalArgumentException("Поисковая строка не может быть null, пустой или состоять только из пробелов!");
         }
-        if (size == 0) {
+        if (searchables.isEmpty()) {
             throw new BestResultNotFound(search);
         }
 
         Searchable bestMatch = null;
         int maxRepetitions = 0;
-        for (int i = 0; i < size; i++) {
-            Searchable current = searchables[i];
-
+        for (Searchable current : searchables) {
             if (current == null) {
                 continue;
             }

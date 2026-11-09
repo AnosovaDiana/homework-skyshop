@@ -34,7 +34,7 @@ public class Main {
         basket.clearBasket();
         System.out.println("Корзина очищена.\n");
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
         Product phone = new Product("Смартфон Apple iPhone 16") {
             @Override
             public double getPrice() {
@@ -91,20 +91,16 @@ public class Main {
         searchEngine.add(teaArticle);
 
         System.out.println("ПОИСК ПО ЗАПРОСУ: 'iPhone'");
-        Searchable[] results = searchEngine.search("iPhone");
+        java.util.List<Searchable> results = searchEngine.search("iPhone");
 
         for (Searchable result : results) {
-            if (result != null) {
-                System.out.println(result.getStringRepresentation());
-            }
+            System.out.println(result.getStringRepresentation());
         }
 
         System.out.println("\nПОИСК ПО ЗАПРОСУ: 'Чай'");
-        Searchable[] teaResults = searchEngine.search("Чай");
+        java.util.List<Searchable> teaResults = searchEngine.search("Чай");
         for (Searchable result : teaResults) {
-            if (result != null) {
-                System.out.println(result.getStringRepresentation());
-            }
+            System.out.println(result.getStringRepresentation());
         }
         System.out.println("----------------------------------------");
         try {
@@ -118,7 +114,6 @@ public class Main {
             System.out.println("Попытка создать SimpleProduct с ценой 0");
             SimpleProduct freeBread = new SimpleProduct("Хлеб", 0);
         } catch (IllegalArgumentException e) {
-            // Обрабатываем исключение: выводим сообщение об ошибке
             System.out.println("Реакция системы: " + e.getMessage());
         }
 
@@ -126,7 +121,6 @@ public class Main {
             System.out.println("Попытка создать DiscountedProduct со скидкой 150%");
             DiscountedProduct superDiscount = new DiscountedProduct("Смартфон", 25000, 150);
         } catch (IllegalArgumentException e) {
-            // Обрабатываем исключение: выводим сообщение об ошибке
             System.out.println("Реакция системы: " + e.getMessage());
         }
 
@@ -138,7 +132,7 @@ public class Main {
             System.out.println("Реакция системы: " + e.getMessage());
         }
 
-        SearchEngine engine = new SearchEngine(5);
+        SearchEngine engine = new SearchEngine();
         engine.add(new Article("Кофе", "Кофе несет как пользу, так и вред"));
         engine.add(new Article("Рецепт пирога", "Как приготовить вкусный яблочный пирог в духовке."));
         engine.add(new Article("Космические корабли", "Технологии будущего: космолёты, гиперпрыжки и новые галактики."));
@@ -166,4 +160,3 @@ public class Main {
 
     }
 }
-
