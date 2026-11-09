@@ -4,6 +4,8 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.SimpleProduct;
 
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         Product milk = new SimpleProduct("Молоко", 80);
@@ -23,14 +25,26 @@ public class App {
         basket.addProduct(cook);
         System.out.println("В корзину добавлено 5 товаров\n");
 
-        System.out.println("Попытка добавить 6-й товар в корзину:");
-        basket.addProduct(fish);
-        System.out.println();
 
         System.out.println("Вывод содержимого заполненной корзины:");
         basket.printBasket();
         System.out.println();
+        List<Product> removedMilk = basket.removeProductByName("Молоко");
+        System.out.println("Удалено продуктов: " + removedMilk.size()); // Выведет: 2
+        System.out.println("Вывод содержимого заполненной корзины:");
+        basket.printBasket();
+        System.out.println();
 
+        List<Product> removed = basket.removeProductByName("Бананы");
+        if (removed.isEmpty()) {
+            System.out.println("Такого продукта не было в корзине. Список удаленных пуст.");
+        } else {
+            System.out.println("Удалено продуктов: " + removed.size());
+        }
+        System.out.println();
+        System.out.println("Вывод содержимого заполненной корзины:");
+        basket.printBasket();
+        System.out.println();
         System.out.println("Получение итоговой суммы корзины:");
         int total = basket.getTotalPrice();
         System.out.println("Итого: " + total + "\n");
