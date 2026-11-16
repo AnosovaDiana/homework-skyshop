@@ -1,20 +1,22 @@
 package org.skypro.skyshop.article;
 
+import org.skypro.skyshop.search.Searchable;
+
 public final class Article implements Searchable {
     private final String title;
     private final String text;
 
     public Article(String title, String text) {
-        this.title = title;
         this.text = text;
-    }
-
-    public String getTitle() {
-        return title;
+        this.title = title;
     }
 
     public String getText() {
         return text;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     @Override
@@ -22,19 +24,18 @@ public final class Article implements Searchable {
         return title + "\n" + text;
     }
 
-    public String getName() {
-        return title;
-    }
-
+    @Override
     public String getSearchTerm() {
         return toString();
     }
 
+    @Override
     public String getContentType() {
         return "ARTICLE";
     }
 
+    @Override
+    public String getName() {
+        return title;
+    }
 }
-
-
-

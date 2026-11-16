@@ -1,32 +1,24 @@
 package org.skypro.skyshop.product;
 
 public class SimpleProduct extends Product {
-    private double price;
+    private final int price;
 
-    public SimpleProduct(String name, double price) {
+    public SimpleProduct(String name, int price) {
         super(name);
         if (price <= 0) {
-            throw new IllegalArgumentException("Цена продукта должна быть строго больше 0!");
+            throw new IllegalArgumentException("Некорректная стоимость");
         }
         this.price = price;
     }
 
     @Override
-    public double getPrice() {
+    public int getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     @Override
     public String toString() {
-        return getName() + ": " + price;
+        return getName() + ": " + getPrice();
     }
 
-    @Override
-    public boolean isSpecial() {
-        return false;
-    }
 }
