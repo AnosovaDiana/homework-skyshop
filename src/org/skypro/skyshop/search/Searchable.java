@@ -1,6 +1,6 @@
-package org.skypro.skyshop.article; // Должно быть строго так
+package org.skypro.skyshop.search;
 
-public interface Searchable { // Обязательно PUBLIC
+public interface Searchable {
     String getSearchTerm();
 
     String getContentType();
@@ -11,3 +11,4 @@ public interface Searchable { // Обязательно PUBLIC
         return getName() + " — " + getContentType();
     }
 }
+
