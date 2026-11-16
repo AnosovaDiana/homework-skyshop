@@ -11,6 +11,7 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
 import java.util.List;
+import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
@@ -52,14 +53,12 @@ public class App {
         );
         searchEngine.add(cofeeArticle);
         searchEngine.add(orangeArticle);
-        List<Searchable> searchResults = searchEngine.search("Кофе");
-        for (Searchable result : searchResults) {
-            if (result != null) {
-                System.out.println(result.getStringRepresentation());
-            }
-        }
-        List<Searchable> searchResults1 = searchEngine.search("Апельсин");
-        for (Searchable result : searchResults1) {
+        Map<String, Searchable> searchResults = searchEngine.search("Кофе");
+        for (Searchable result : searchResults.values()) {
+       System.out.println(result.getStringRepresentation());
+   }
+        Map<String, Searchable> searchResults1 = searchEngine.search("Апельсин");
+        for (Searchable result : searchResults1.values()) {
             if (result != null) {
                 System.out.println(result.getStringRepresentation());
             }
