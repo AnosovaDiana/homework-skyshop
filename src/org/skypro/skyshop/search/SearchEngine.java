@@ -1,13 +1,9 @@
 package org.skypro.skyshop.search;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
-    private final List<Searchable> searchables = new ArrayList<>();
-
+    private final Set<Searchable> searchables = new HashSet<>();
 
 
     public SearchEngine() {
@@ -17,11 +13,11 @@ public class SearchEngine {
         searchables.add(searchable);
     }
 
-    public Map<String, Searchable> search(String searchTerm) {
-        Map<String, Searchable> results = new TreeMap<>();
+    public Set<Searchable> search(String searchTerm) {
+        Set<Searchable> results = new TreeSet<>(new SearchableComparator());
         for (Searchable item : searchables) {
             if (item != null && item.getSearchTerm().contains(searchTerm)) {
-                results.put(item.getName(), item);
+                results.add(item);
             }
         }
         return results;

@@ -12,6 +12,7 @@ import org.skypro.skyshop.search.Searchable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
@@ -53,12 +54,12 @@ public class App {
         );
         searchEngine.add(cofeeArticle);
         searchEngine.add(orangeArticle);
-        Map<String, Searchable> searchResults = searchEngine.search("Кофе");
-        for (Searchable result : searchResults.values()) {
-       System.out.println(result.getStringRepresentation());
-   }
-        Map<String, Searchable> searchResults1 = searchEngine.search("Апельсин");
-        for (Searchable result : searchResults1.values()) {
+        Set<Searchable> searchResults = searchEngine.search("Кофе");
+        for (Searchable result : searchResults) {
+            System.out.println(result.getStringRepresentation());
+        }
+        Set<Searchable> searchResults1 = searchEngine.search("Апельсин");
+        for (Searchable result : searchResults1) {
             if (result != null) {
                 System.out.println(result.getStringRepresentation());
             }
@@ -101,8 +102,32 @@ public class App {
             System.out.println("Список пуст");
         }
         myBasket.printProductList();
+
+        Product coffee1 = new SimpleProduct("Кофе", 100);
+        Product coffee2 = new SimpleProduct("Кофе в зёрнах", 350);
+        Product coffeeDuplicate = new SimpleProduct("Кофе", 200);
+
+        Article coffeeArticle1 = new Article("Кофе-брейк", "Статья про перерыв на кофе");
+        Article coffeeArticle2 = new Article("Кофе-латте", "Рецепт приготовления кофе");
+
+        searchEngine.add(coffee1);
+        searchEngine.add(coffee2);
+        searchEngine.add(coffeeDuplicate);
+        searchEngine.add(coffeeArticle1);
+        searchEngine.add(coffeeArticle2);
+        System.out.println("Сценарий: Поиск по слову 'Кофе'");
+        Set<Searchable> coffeeResults = searchEngine.search("Кофе");
+        for (Searchable item : coffeeResults) {
+            System.out.println(item.getStringRepresentation());
+        }
+        System.out.println("Сценарий: Поиск по слову 'Рецепт'");
+        Set<Searchable> recipeResults = searchEngine.search("Рецепт");
+        for (Searchable item : recipeResults) {
+            System.out.println(item.getStringRepresentation());
+        }
+        System.out.println("Сценарий: Поиск несуществующего слова");
+        Set<Searchable> emptyResults = searchEngine.search("Шоколад");
+        System.out.println("Найдено элементов: " + emptyResults.size());
     }
-
-
 }
 
